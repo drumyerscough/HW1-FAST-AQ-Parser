@@ -16,23 +16,23 @@ def main():
 
     # For each record of FastaParser, Transcribe the sequence
     # and print it to console
-    for record in fa_parser:
-        print(record[0], transcribe(record[1]))
+    for header, seq in fa_parser:
+        print(header, transcribe(seq))
     
     # For each record of FastqParser, Transcribe the sequence
     # and print it to console
-    for record in fq_parser:
-        print(record[0], transcribe(record[1]))
+    for header, seq, _ in fq_parser:
+        print(header, transcribe(seq))
 
     # For each record of FastaParser, Reverse Transcribe the sequence
     # and print it to console
-    for record in fa_parser:
-        print(record[0], reverse_transcribe(record[1]))
+    for header, seq in fa_parser:
+        print(header, reverse_transcribe(seq))
 
     # For each record of FastqParser, Reverse Transcribe the sequence
     # and print it to console
-    for record in fq_parser:
-        print(record[0], reverse_transcribe(record[1]))
+    for header, seq, _ in fq_parser:
+        print(header, reverse_transcribe(seq))
 
 """
 When executing a python script from the command line there will

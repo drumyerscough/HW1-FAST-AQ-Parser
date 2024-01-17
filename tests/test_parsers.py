@@ -6,7 +6,6 @@ from seqparser import (
 
 import pytest
 
-
 def test_freebie_parser_1():
     """
     This one is a freebie
@@ -33,7 +32,17 @@ def test_FastaParser():
     files that are blank or corrupted in some way. Two example Fasta files are
     provided in /tests/bad.fa and /tests/empty.fa
     """
-    pass
+    # check if fasta is empty
+    parser = FastaParser('blank.fa')
+    assert len(list(parser)) > 0
+
+    # check if fasta is malformed
+    parser = FastaParser('bad.fa')
+    for header, seq in parser:
+        # has header
+        assert type(header) == str and header.startswith('>')
+        # has a sequence and is only letters
+        assert len(seq) > 0 and type(seq) == str and seq.isalpha()
 
 
 def test_FastaFormat():
@@ -41,8 +50,9 @@ def test_FastaFormat():
     Test to make sure that a fasta file is being read in if a fastq file is
     read, the first item is None
     """
-    pass
-
+    parser = FastaParser('test.fq')
+    for record in parser:
+        assert record[0] != None
 
 def test_FastqParser():
     """
@@ -50,11 +60,25 @@ def test_FastqParser():
     an instance of your FastqParser class and assert that it properly reads 
     in the example Fastq File.
     """
-    pass
+    # check if fasta is empty
+    parser = FastqParser('blank.fq')
+    assert len(list(parser)) > 0
+
+    # check if fasta is malformed
+    parser = FastqParser('bad.fq')
+    for header, seq, qual in parser:
+        # has header
+        assert type(header) == str and header.startswith('>')
+        # has a sequence, is string, and is only letters
+        assert len(seq) > 0 and type(seq) == str and seq.isalpha()
+        # has score, is string, and is ascii
+        assert len(qual) > 0 and type(qual) == str and qual.isascii()
 
 def test_FastqFormat():
     """
     Test to make sure fastq file is being read in. If this is a fasta file, the
     first line is None
     """
-    pass
+    parser = FastqParser('test.fa')
+    for record in parser:
+        assert record[0] != None
