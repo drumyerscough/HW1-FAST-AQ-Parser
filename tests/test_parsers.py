@@ -53,7 +53,7 @@ def test_FastaFormat():
     """
     parser = FastaParser(os.path.join('tests', 'test.fq'))
     for record in parser:
-        assert record[0] != None
+        assert record[0] == None
 
 def test_FastqParser():
     """
@@ -82,4 +82,4 @@ def test_FastqFormat():
     """
     parser = FastqParser(os.path.join('tests', 'test.fa'))
     for record in parser:
-        assert record[0] != None
+        assert record[0] == None
