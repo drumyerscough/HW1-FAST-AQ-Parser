@@ -16,6 +16,7 @@ jobs:
 
       - name: Install package
         run: |
+          pip install pytest  
           pip install seqparser
       - name: Test with pytest
         run: |
