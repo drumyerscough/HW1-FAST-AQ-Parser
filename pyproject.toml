@@ -19,10 +19,7 @@ classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["version", "description"]
 dependencies = [
     "pytest",
-	"os",
-	"io",
-	"typing",
 ]
 
 [project.urls]
-Home = "https://github.com/BMI203-2024/HW1-FAST-AQ-Parser.git"
+Home = "https://github.com/drumyerscough/HW1-FAST-AQ-Parser"
