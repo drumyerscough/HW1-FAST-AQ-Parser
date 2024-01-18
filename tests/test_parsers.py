@@ -5,6 +5,7 @@ from seqparser import (
         FastqParser)
 
 import pytest
+import os
 
 def test_freebie_parser_1():
     """
@@ -33,11 +34,11 @@ def test_FastaParser():
     provided in /tests/bad.fa and /tests/empty.fa
     """
     # check if fasta is empty
-    parser = FastaParser('blank.fa')
+    parser = FastaParser(os.path.join('tests', 'blank.fa'))
     assert len(list(parser)) > 0
 
     # check if fasta is malformed
-    parser = FastaParser('bad.fa')
+    parser = FastaParser(os.path.join('tests', 'bad.fa'))
     for header, seq in parser:
         # has header
         assert type(header) == str and header.startswith('>')
@@ -50,7 +51,7 @@ def test_FastaFormat():
     Test to make sure that a fasta file is being read in if a fastq file is
     read, the first item is None
     """
-    parser = FastaParser('test.fq')
+    parser = FastaParser(os.path.join('tests', 'test.fq'))
     for record in parser:
         assert record[0] != None
 
@@ -61,11 +62,11 @@ def test_FastqParser():
     in the example Fastq File.
     """
     # check if fasta is empty
-    parser = FastqParser('blank.fq')
+    parser = FastqParser(os.path.join('tests', 'blank.fq'))
     assert len(list(parser)) > 0
 
     # check if fasta is malformed
-    parser = FastqParser('bad.fq')
+    parser = FastqParser(os.path.join('tests', 'bad.fq'))
     for header, seq, qual in parser:
         # has header
         assert type(header) == str and header.startswith('>')
@@ -79,6 +80,6 @@ def test_FastqFormat():
     Test to make sure fastq file is being read in. If this is a fasta file, the
     first line is None
     """
-    parser = FastqParser('test.fa')
+    parser = FastqParser(os.path.join('tests', 'test.fa'))
     for record in parser:
         assert record[0] != None
